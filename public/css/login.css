@@ -1,0 +1,99 @@
+body{
+    height: 100vh;
+    display: flex;
+    position: relative;
+    background:rgb(0, 0, 0);
+    overflow-y:hidden;
+
+}
+
+.madc-form{
+     color: white;
+     padding: 2.5vw 4.5vw;
+     text-align: center;
+     background: rgba(0, 0, 0, 0);
+     z-index: 1;
+ }
+ body:before{
+     content: "";
+     background: rgba(218,90,1, 0.7); 
+     width: 30%;
+     height: 60vh;
+     position: absolute;
+     clip-path: circle(48.2% at 14% 50%);
+     transform: translateX(0%) translateY(0%);
+
+ }
+ body:after{
+     content: "";
+     background: rgba(218,90,1, 0.7); 
+     width: 30%;
+     height: 53vh;
+     position: absolute;
+     clip-path: circle(44.8% at 51% 100%);
+     transform: translateX(230%) translateY(90%);
+     
+ }
+ 
+ .madc-form button{
+     text-align: center
+ }
+ .madc-form label{
+     padding: 0 100% 0 0;
+     font-weight: 600;
+     font-size: 20px;
+ }
+ 
+ button.btn{
+     background: rgba(218,90,1); 
+     border: none;
+     color:white;
+     font-weight: 700;
+ }
+ button.btn:hover{
+     background: rgba(218,90,1, 0.5); 
+ }
+ .login-form{
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     -ms-transform: translate(-50%, -50%);
+     transform: translate(-50%, -50%);
+     padding: 0 4vw;
+     z-index: 1;
+ }
+ .madc-logo{
+     height: auto;
+     width:170px;
+     background: none;
+ }
+ @media only screen and (max-width: 767px)   {
+     body:before{
+     width: 22%;
+     height: 60vh;
+     clip-path: circle(45.1% at 0 52%);
+
+     transform: translateX(0%) translateY(10%);
+ }
+     body{
+         overflow-y: hidden;
+     }
+ }
+ @media only screen and (min-width: 768px) and (max-width: 991px)  {
+     body:before{
+     width: 30%;
+     height: 60vh;
+     transform: translateX(0%) translateY(10%);
+ }
+ body:after{
+     content: "";
+     width: 16%;
+     height: 40vh;
+     clip-path: circle(45.1% at 76% 66%);
+     transform: translateX(525%) translateY(155%);
+ }
+ body{
+         overflow-y: hidden;
+     }
+ }
+ 

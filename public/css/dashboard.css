@@ -1,0 +1,170 @@
+body {
+    font-family: Bebas Neue;
+    padding:0;
+    margin:0;
+  }
+
+.dash-logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    width: 7.7vw;
+    position: relative;
+  }
+ /* all table td tr css */
+  tr td{
+    padding: 0 !important;
+    margin: 0 !important;
+    letter-spacing:0.5px;
+    font-size: 1.3vw;
+    text-align: normal;
+    vertical-align: middle;
+  }
+
+  /* sidenav css */
+  .sidenav {
+    height: 100%;
+    width: 12vw;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(27, 27, 27);
+    overflow-x: hidden;
+    padding-top: 2vw;
+  }
+  .sidenav a:hover {
+    color: #da5a01;
+  }
+  .sidenav a.bar.highlight:hover {
+    color: #f1f1f1;
+  }
+  .notification, .appointment, .settings{
+    padding: 2.3vw 1vw 0 3vw;
+}
+a.bar{
+  font-size: 1.4vw;
+  color: white;
+  display: block;
+  text-decoration: none;
+  cursor:pointer;
+}
+.bar.highlight{
+  color:#da5a01;
+  cursor: default;
+  pointer-events: none;
+}
+/* end of sidenav */
+  
+
+
+/* date & time css */
+.dashboard-date-time{
+    margin:4.5vw 0 0 0;
+    background-color: white;
+}
+.dashboard-date-time h3{
+    color:black;
+    margin: 0;
+    font-size: 1.8vw;
+    font-weight: bold;
+}
+.dashboard-date-time h2{
+    color:#da5a01;
+    margin: 0;
+    font-size: 2.2vw;
+    font-weight: normal;
+}
+.dashboard-date-time .notif h2{
+    margin-top: 1.5vw;
+    font-weight: normal;
+    font-size: 1.7vw;
+    margin-bottom: 0.5vw;
+}
+/* end of date & time */
+
+/* notif table css */
+.notif-table tbody{
+  background:white;
+  border:1px white;
+  text-decoration:none;
+  padding:0;
+}
+.dashboard-notification .col-8.new span p{
+    display:inline-block;
+    color: black;
+    font-size: 1.3vw;
+}
+
+.dashboard-notification .col-1{
+    text-align: center;
+}
+
+.new-notif{
+  background:#da5a01;
+  color:white;
+  padding:0.1vw 0.5vw;
+  border-radius:0.5vw;
+  letter-spacing:0.1vw;
+  text-align: justify;
+  font-size: 1.1vw;
+}
+/* end of notif table */
+
+
+.dashboard-appointments tr td{
+  font-size: 1.3vw;
+}
+.dashboard-appointments .col-8.pending-table{
+  background-color: rgb(27, 27, 27);
+  padding:2vw 0 0 0;
+  border-radius:1.5vw;
+}
+.pending-table table tbody.pending{
+  border:1px white;
+  text-decoration:none;
+  padding:0;
+  color:white;
+}
+.pending-table table tbody.pending .pending-header td, tbody.follow-up .pending-header td{
+  width:0;
+  text-align:left;
+  vertical-align:center;
+}
+.pending-table table tbody.pending .pending-header h5, tbody.follow-up .pending-header h5{
+  color:white;
+  font-size: 2vw;
+  margin: 0 0 1.5vw 4vw;
+}
+.pending-checkbox{
+  width: 3vw;
+  text-align: center;
+  vertical-align: middle;
+}
+.pending-table table tbody.follow-up{
+  border:1px white;
+  text-decoration:none;
+  padding:0;
+  color:white;
+}
+
+/* calendar css */
+.fc-unthemed td.fc-today span.fc-day-number{
+  color:white;
+  background: #da5a01;
+  padding: 0.1vw 0.6vw;
+  border-radius:50%;
+}
+.fc-unthemed td.fc-today{
+  background: white;
+}
+.fc-toolbar h2{
+  color: black;
+  font-size: 2vw
+}
+.fc-toolbar h2::before{
+  content: "appointments for ";
+}
+
+/* end of calendar css */
