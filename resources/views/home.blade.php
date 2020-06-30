@@ -64,10 +64,13 @@
         </table>
         <div class="row">
           <div class="col-md-4 text-center">
-            <button id="sellAllBtn" type="button" class="btn btn-warning custom-btn">See all</button>
+            {{-- <button id="sellAllBtn" type="button" class="btn btn-warning custom-btn"><a href="#">See all</a></button> --}}
           </div>
           <div class="col-md-4 text-center">
-            <button id="markAllBtn" type="button" class="btn btn-warning custom-btn">Mark all as read</button>
+            <form method="POST" action="{{ route('mark_as_read') }}">
+              @csrf
+              <button id="markAllBtn" type="submit" class="btn btn-warning custom-btn" style="color: white;">Mark all as read</button>
+            </form>
           </div>
         </div>
       </div>
@@ -76,94 +79,106 @@
     {{-- end of notification --}}
     {{-- pending appointment --}}
     <div class="row align-items-center dashboard-appointments" style="margin: 2vw 0 0 0;">
-      <div class="col-2"></div>
-      <div class="col-8 pending-table">
-        <table class="table table-borderless">
-          {{-- pending --}}
-          <tbody class="pending">
-            <tr class="pending-header">
-              <td colspan="7">
-                <h5>pending appointments</h5>
-              </td>
-            </tr>
-            <tr>
-              <td class="pending-checkbox"><span style="margin-left:3vw;"><input type="checkbox" name="" id=""></span></td>
-              <td style="width: 5vw">june 5 2020</td>
-              <td style="width: 5vw">6:03 PM</td>
-              <td style="width: 5vw">cleaning</td>
-              <td style="width: 7vw">jessie valeza </td>
-              <td style="width: 5vw">0906-055-5365</td>
-              <td style="width: 9vw;text-align: center;vertical-align: middle;"><i class="fa fa-check"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="fa fa-ban"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="fa fa-comment"></i>
-              </td>
-            </tr>
-            <tr>
-              <td class="pending-checkbox"><span style="margin-left:3vw;"><input type="checkbox" name="" id=""></span></td>
-              <td style="width: 5vw">june 5 2020</td>
-              <td style="width: 5vw">6:03 PM</td>
-              <td style="width: 5vw">cleaning</td>
-              <td style="width: 7vw">jessie valeza </td>
-              <td style="width: 5vw">0906-055-5365</td>
-              <td style="width: 9vw;text-align: center;vertical-align: middle;"><i class="fa fa-check"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="fa fa-ban"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="fa fa-comment"></i>
-              </td>
-            </tr>
-          </tbody>
-          {{-- follow-up --}}
-          <tbody class="follow-up"  style="display: none;">
-            <tr>
-              <td colspan="7" style="margin-top:5vw;">
-                <h5 style="color:#da5a01;font-size: 2vw;margin: 3vw 0 1.5vw 4vw;">for follow up</h5>
-              </td>
-            </tr>
-            <tr>
-              <td class="pending-checkbox"><span style="margin-left:3vw;"><input type="checkbox" name="" id=""></span></td>
-              <td style="width: 5vw">june 5 2020</td>
-              <td style="width: 5vw">6:03 PM</td>
-              <td style="width: 5vw">cleaning</td>
-              <td style="width: 7vw">jessie valeza </td>
-              <td style="width: 5vw">0906-055-5365</td>
-              <td style="width: 9vw;text-align: center;vertical-align: middle;"><i class="fa fa-check"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="fa fa-ban"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="fa fa-comment"></i>
-              </td>
-            </tr>
-            <tr>
-              <td class="pending-checkbox"><span style="margin-left:3vw;"><input type="checkbox" name="" id=""></span></td>
-              <td style="width: 5vw">june 5 2020</td>
-              <td style="width: 5vw">6:03 PM</td>
-              <td style="width: 5vw">cleaning</td>
-              <td style="width: 7vw">jessie valeza </td>
-              <td style="width: 5vw">0906-055-5365</td>
-              <td style="width: 9vw;text-align: center;vertical-align: middle;"><i class="fa fa-check"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="fa fa-ban"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="fa fa-comment"></i>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="modal fade" id="appointmentModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="appointmentModalTitle">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="appointmentModalContent">
+              </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col-2"></div>
+        <div class="col-9 pending-table">
+          <table class="table table-borderless">
+            {{-- pending --}}
+            <tbody class="pending">
+              <tr class="pending-header"><td colspan="7"><h5>Pending Appointments</h5></td></tr>
+              @foreach($pending as $data)
+              <tr>
+                <td style="width: 3vw;margin-left:5vw;">
+                  <?php
+
+                  $current = $data->appointment_date;
+                  $new = Date('F d Y', strtotime($current));
+                  echo $new;
+              
+                  ?>
+                </td>
+                <td style="width: 4vw">{{ $data->appointment_time_start }} - {{ $data->appointment_time_end }}</td>
+                <td style="width: 7vw">{{ $data->appointment_service }}</td>
+                <td style="width: 5vw">{{ $data->appointment_customer }}</td>
+                <td style="width: 3vw">{{ $data->phone }}</td>
+                <td style="width: 4vw;text-align: center;vertical-align: middle;">
+                  <i class="appointment-form fa fa-check actions pr-2 pl-2" data-date="{{ $data->appointment_date }}" data-start="{{ $data->appointment_time_start }}" data-end="{{ $data->appointment_time_end }}" data-slot="{{ $data->slot_no }}"></i>
+                  <i class="delete-form fa fa-ban actions pr-2 pl-2" data-date="{{ $data->appointment_date }}" data-start="{{ $data->appointment_time_start }}" data-end="{{ $data->appointment_time_end }}" data-slot="{{ $data->slot_no }}"></i>
+                  <i class="view-form fas fa-search actions pr-2 pl-2" data-date="{{ $data->appointment_date }}" data-start="{{ $data->appointment_time_start }}" data-end="{{ $data->appointment_time_end }}" data-slot="{{ $data->slot_no }}"></i>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+        <div class="col-1"></div>
+      </div>
+
+      <div class="row align-items-center dashboard-appointments" style="margin: 2vw 0 0 0;">
+        <div class="col-2"></div>
+        <div class="col-9 pending-table">
+          <table class="table table-borderless">
+            {{-- pending --}}
+            <tbody class="pending">
+              <tr class="pending-header"><td colspan="7"><h5 style="color:#da5a01">For follow-up</h5></td></tr>
+              @foreach($follow as $data)
+              <tr>
+                <td style="width: 3vw;margin-left:5vw;">
+                  <?php
+
+                  $current = $data->appointment_date;
+                  $new = Date('F d Y', strtotime($current));
+                  echo $new;
+              
+                  ?>
+                </td>
+                <td style="width: 4vw">{{ $data->appointment_time_start }} - {{ $data->appointment_time_end }}</td>
+                <td style="width: 7vw">{{ $data->appointment_service }}</td>
+                <td style="width: 5vw">{{ $data->appointment_customer }}</td>
+                <td style="width: 3vw">{{ $data->phone }}</td>
+                <td style="width: 4vw;text-align: center;vertical-align: middle;">
+                  <i class="appointment-form fa fa-check actions pr-2 pl-2" data-date="{{ $data->appointment_date }}" data-start="{{ $data->appointment_time_start }}" data-end="{{ $data->appointment_time_end }}" data-slot="{{ $data->slot_no }}"></i>
+                  <i class="delete-form fa fa-ban actions pr-2 pl-2" data-date="{{ $data->appointment_date }}" data-start="{{ $data->appointment_time_start }}" data-end="{{ $data->appointment_time_end }}" data-slot="{{ $data->slot_no }}"></i>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+        <div class="col-1"></div>
     </div>
     {{-- end of pending appointment --}}
     {{-- calendar appointment for today --}}
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+    <div class="modal fade bd-example-modal-lg" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content container" id="calendarModalContent">
+          <div class="text-center" id="dateSlot">
           </div>
-          <div class="modal-body">
-            ...
+          <div id="slot1">
+            <h2>Slot 1</h2>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+          <div id="slot2">
+            <h2>Slot 2</h2>
+          </div>
+          <div id="slot3">
+            <h2>Slot 3</h2>
           </div>
         </div>
       </div>

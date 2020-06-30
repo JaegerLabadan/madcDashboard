@@ -7,7 +7,7 @@ if (!("Notification" in window)) {
 }
 else if (Notification.permission === "granted") {
         var options = {
-                body: "This is the body of the notification",
+                body: "New Appointments have been received!",
                 icon: "icon.jpg",
                 dir : "ltr"
             };
@@ -21,7 +21,7 @@ else if (Notification.permission !== 'denied') {
     
     if (permission === "granted") {
         var options = {
-            body: "This is the body of the notification",
+            body: "New Appointments have been received!",
             icon: "icon.jpg",
             dir : "ltr"
         };
@@ -42,10 +42,11 @@ function checkForNotifications(){
 
             if(result[1] != 0){
                 
-                $('#newNotifs').text(result[0]);
-                $('#unreadNotifs').text(result[1]);
+               
                 if(previous != result[1]){
 
+                    $('#newNotifs').text(result[0]);
+                    $('#unreadNotifs').text(result[1]);
                     notifyMe();
                     previous = result[1];
                 }
@@ -55,13 +56,12 @@ function checkForNotifications(){
         }
 
     });
-    callable = setTimeout(checkForNotifications, 2000);
+    callable = setTimeout(checkForNotifications, 10000);
         
 }
 
 $(document).ready(function(){
     
-
-    // checkForNotifications();
+    checkForNotifications();
 
 });

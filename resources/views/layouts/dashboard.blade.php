@@ -3,15 +3,19 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/jpg" href="{{ asset('img/madc-favicon.png') }}"/>
+    {{-- <link rel="icon" href="{{ asset('img/madc-favicon.png') }}" type="image/x-icon"> --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('fullcalendar/core/main.css') }}">
     <link rel="stylesheet" href="{{ asset('fullcalendar/daygrid/main.css') }}">
     <link rel="stylesheet" href="{{ asset('fullcalendar/list/main.css') }}">
     <link rel="stylesheet" href="{{ asset('fullcalendar/timegrid/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dashboard_table.css') }}">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
@@ -20,9 +24,21 @@
     <script src="{{ asset('fullcalendar/daygrid/main.js') }}" defer></script>
     <script src="{{ asset('fullcalendar/list/main.js') }}" defer></script>
     <script src="{{ asset('fullcalendar/timegrid/main.js') }}" defer></script>
+    <script defer>
+
+      $.ajaxSetup({
+
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+
+      });
+
+    </script>
     <script src="{{ asset('calendar-madc.js') }}" defer></script>
     <script src="{{ asset('js/calendar.js') }}" defer></script>
     <script src="{{ asset('js/notifications.js') }}" defer></script>
+    <script src="{{ asset('js/appointments.js') }}" defer></script>
     <title>Dashboard</title>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Marck+Script&display=swap');
@@ -51,10 +67,7 @@
               <h2><a class="bar" href="{{ route('new_notifs') }}">new <span id="newNotifs" class="badge badge-warning">0</span></h2></a></h2>
             </span>
             <span>
-              <h2><a class="bar" href="#">unread <span id="unreadNotifs" class="badge badge-warning">0</span></h2></a></h2>
-            </span>
-            <span>
-              <h2><a class="bar" href="#">see all</a></h2>
+              <h2><a class="bar" href="{{ route('unread_notifs') }}">unread <span id="unreadNotifs" class="badge badge-warning">0</span></h2></a></h2>
             </span>
           </div>
         </div>
@@ -64,19 +77,16 @@
               <h2><a class="bar highlight" href="#">appointment</a></h2>
             </span>
             <span>
-              <h2><a class="bar" href="#">pending</a></h2>
+              <h2><a class="bar" href="{{ route('pending_appointments') }}">pending</a></h2>
             </span>
             <span>
-              <h2><a class="bar" href="#">for follow-up</a></h2>
+              <h2><a class="bar" href="{{ route('followup_appointments') }}">for follow-up</a></h2>
             </span>
             <span>
-              <h2><a class="bar" href="#">today</a></h2>
+              <h2><a class="bar" href="{{ route('appointments_today') }}">today</a></h2>
             </span>
             <span>
-              <h2><a class="bar" href="#">month</a></h2>
-            </span>
-            <span>
-              <h2><a class="bar" href="#">see all</a></h2>
+              <h2><a class="bar" href="{{ route('appointments_this_month') }}">month</a></h2>
             </span>
           </div>
         </div>

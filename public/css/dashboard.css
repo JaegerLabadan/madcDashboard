@@ -168,3 +168,114 @@ a.bar{
 }
 
 /* end of calendar css */
+
+
+/* Overrides */
+
+.btn-warning{
+  background: #DA5A01;
+  border-color: #DA5A01;
+}
+
+.btn-warning a{
+  color: #ffff!important;
+}
+
+
+#sellAllBtn a{
+  color: black;
+  text-decoration: none;
+}
+
+#markAllBtn a{
+  color: black;
+  text-decoration: none;  
+}
+
+.info-text{
+  font-size: 0.6em;
+}
+
+.info-text span{
+  color: #da5a01;
+}
+
+.actions{
+  cursor: pointer;
+}
+
+.actions:hover{
+  color: #da5a01;
+}
+
+.appointment-details{
+  padding: 3%;
+}
+
+.appointment-details h3{
+  font-family: Bebas Neue;
+  font-weight: 400;
+}
+
+#calendarModalContent{
+  padding: 5%;
+}
+
+#calendarModalContent h2{
+  margin-top: 2%;
+  text-decoration: underline;
+  color: #DA5D01;
+}
+
+
+ 
+tbody.notif{
+  background-color: #1b1b1b;
+}
+.dashboard-notif tr td{
+font-size: 1.3vw;
+}
+.dashboard-notif .col-8.notif-table{
+background-color: #1b1b1b;
+padding:2vw 0 0 0;
+border-radius:0.8vw;
+}
+.notif-table table tbody.notif{
+border:1px white;
+text-decoration:none;
+padding:0;
+color:white;
+}
+.notif-table table tbody.notif .notif-header td{
+width:0;
+text-align:left;
+vertical-align:center;
+}
+.notif-table table tbody.notif .notif-header h5{
+color:white;
+font-size: 2vw;
+margin: 0 0 1.5vw 4vw;
+}
+.notif-checkbox{
+width: 3vw;
+text-align: center;
+vertical-align: middle;
+}
+td{
+  text-align: center;
+}
+
+.page-link{
+  color: #DA5A01;
+}
+
+.page-item:disabled{
+  color: #DA5A01;
+}
+
+.page-item:active{
+  background: #DA5A01!important;
+}
+/* end of notif table */
+
+

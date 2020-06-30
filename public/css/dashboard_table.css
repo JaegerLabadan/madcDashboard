@@ -1,0 +1,41 @@
+/* end of notif table */
+
+
+.dashboard-appointments tr td{
+    font-size: 1.3vw;
+  
+  }
+  .dashboard-appointments .col-9.pending-table{
+    background-color: rgb(27, 27, 27);
+    padding:2vw 1vw 0 1vw;
+    border-radius:1.5vw;
+  }
+  .pending-table table tbody.pending{
+    border:1px white;
+    text-decoration:none;
+    padding:0;
+    color:white;
+  }
+  .pending-table table tbody.pending .pending-header td, tbody.follow-up .pending-header td{
+    width:0;
+    text-align:left;
+    vertical-align:center;
+  }
+  .pending-table table tbody.pending .pending-header h5, tbody.follow-up .pending-header h5{
+    color:white;
+    font-size: 2vw;
+    margin: 0 0 1.5vw 2vw;
+  }
+  .pending-checkbox{
+    width: 3vw;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .pending-table table tbody.follow-up{
+    border:1px white;
+    text-decoration:none;
+    padding:0;
+    color:white;
+  }
+  
+  /* calendar css */
